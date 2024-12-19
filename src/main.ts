@@ -93,20 +93,41 @@ const numbers = [
 console.log(getBiggestNumberFromNumbers(numbers));
 
 /* 
-Hitta längsta ordet
-Skriv en funktion som tar emot en array av strängar och returnerar den längsta strängen.
+  Hitta längsta ordet
+  Skriv en funktion som tar emot en array av strängar och returnerar den längsta strängen.
 
-*/
-const getLongestString = (stringsInput: string[]): string => {
+  */
+
+const getLongestString = (stringsInput: string[]): number => {
   let longestString: string = "";
-  stringsInput.forEach((string) => {
+  let longestStringIndex: number = 0;
+  stringsInput.forEach((string, index) => {
     if (string.length > longestString.length) {
       longestString = string;
+      longestStringIndex = index;
     }
   });
 
-  return longestString;
+  return longestStringIndex;
 };
+
+const stringType = [
+  "Hello",
+  "World!",
+  "JavaScript",
+  "is",
+  "awesome",
+  "I love coding",
+  "short",
+  "longer string here that says absolutely nothing",
+  "example",
+  "of",
+  "different",
+  "lengths",
+  "arrays are great",
+  "and fun",
+  "JavaScript arrays",
+] as const;
 
 const strings = [
   "Hello",
@@ -125,16 +146,132 @@ const strings = [
   "and fun",
   "JavaScript arrays",
 ];
+type AllowedStrings = (typeof stringType)[number];
 console.log(getLongestString(strings));
 
-/*
-UTMANING: Returnera ett objekt med den längsta strängen och dess index i arrayen.
+/* 
+  Hitta längsta ordet
+  Skriv en funktion som tar emot en array av strängar och returnerar den längsta strängen.
 
-Hitta vanligaste bokstaven
+  */
+/*
+  UTMANING: Returnera ett objekt med den längsta strängen och dess index i arrayen.
+
+  */
+
+const longestStringIndex: number = getLongestString(strings);
+const longestStringType = strings[longestStringIndex];
+const longestString = [longestStringType] as const;
+type LongestString = (typeof longestString)[number];
+
+console.log(`longestString= ${longestStringType}`);
+type stringObject = {
+  longestString: LongestString;
+  index: number;
+};
+
+const getObjectFromLongestString = (
+  stringsArray: string[],
+  stringInput: LongestString
+): stringObject => {
+  let stringObj: stringObject = { longestString: "", index: -1 };
+  let longestString: string = "";
+  stringsArray.forEach((string, index) => {
+    if (string.length > longestString.length) {
+      stringObj = { longestString: stringInput, index: index };
+      longestString = string;
+    }
+  });
+
+  return stringObj;
+};
+
+console.log(getObjectFromLongestString(strings, strings[longestStringIndex]));
+
+const foo = (x: LongestString) => {
+  console.log(x);
+};
+
+foo("d");
+
+/*Hitta vanligaste bokstaven
 Skriv en funktion som tar emot en array av strängar och returnerar den bokstav som är vanligast bland strängarna.
 
 UTMANING: Returnera ett objekt med den vanligaste bokstaven, den strängen i arrayen som har flest sådana bokstäver av alla strängar i arrayen och den strängens position i arrayen.
 
+
+*/
+const getMostComonLetterFromStrings = (stringInput: string[]): string => {
+  let allLetters: string[] = [];
+  stringInput.forEach((str) => {
+    allLetters.push(...str.toLowerCase().split(""));
+  });
+
+  const alphabet: { [key: string]: string[] } = {
+    a: [""],
+    b: [""],
+    c: [""],
+    d: [""],
+    e: [""],
+    f: [""],
+    g: [""],
+    h: [""],
+    i: [""],
+    j: [""],
+    k: [""],
+    l: [""],
+    m: [""],
+    n: [""],
+    o: [""],
+    p: [""],
+    q: [""],
+    r: [""],
+    s: [""],
+    t: [""],
+    u: [""],
+    v: [""],
+    w: [""],
+    x: [""],
+    y: [""],
+    z: [""],
+  };
+
+  allLetters.forEach((letter) => {
+    if (alphabet[letter]) {
+      alphabet[letter].push(letter);
+    }
+  });
+
+  console.log(alphabet);
+
+  console.log(allLetters);
+
+  let maxCount: number = 0;
+  let mostCommonLetter: string = "";
+
+  // Använd forEach för att iterera över objektet
+  Object.entries(alphabet).forEach(([letter, occurrences]) => {
+    const count = occurrences.length - 1; // Vi subtraherar 1 för att ta bort den tomma strängen
+    if (count > maxCount) {
+      maxCount = count;
+      mostCommonLetter = letter; // Uppdatera den mest frekventa bokstaven
+    }
+  });
+
+  const keys = Object.keys(alphabet);
+  console.log("the keys are: ", keys);
+
+  console.log("first letter is:", alphabet.a);
+
+  if (alphabet.a.includes("b")) {
+    console.log("error");
+  }
+
+  return mostCommonLetter;
+};
+console.log(getMostComonLetterFromStrings(strings));
+
+/*
 Generera siffer-array
 Skriv en funktion som tar emot tre siffror och returnerar en array av siffror.
 
@@ -146,6 +283,47 @@ amount = antal siffror i arrayen (dvs dess length när arrayen är klar)
 Arrayen med siffror ska byggas med hjälp av dessa tre värden som funktionen tar emot.
 
 UTMANING: Funktionen tar emot ett objekt istället för tre siffror. Objektet har dessa tre siffror.
+
+*/
+
+const getArrayFromNumbers = (x: number, y: number, z: number): number[] => {
+  let numbersInput: number[] = [x, y, z];
+  let sortedNumbers: number[] = [];
+
+  let biggestNumber = Math.max(...numbersInput);
+  let middleNumber: number = 0;
+  let smallestNumber = Math.min(...numbersInput);
+
+  numbersInput.forEach((number) => {
+    if (number < smallestNumber) {
+      smallestNumber = number;
+    }
+  });
+
+  numbersInput.forEach((number) => {
+    if (number > biggestNumber) {
+      biggestNumber = number;
+    }
+  });
+
+  numbersInput.forEach((number) => {
+    if (number !== biggestNumber && number !== smallestNumber) {
+      {
+        middleNumber = number;
+      }
+    }
+  });
+
+  sortedNumbers.push(smallestNumber);
+  sortedNumbers.push(middleNumber);
+  sortedNumbers.push(biggestNumber);
+
+  return sortedNumbers;
+};
+
+console.log(getArrayFromNumbers(99, 2345225342, 22));
+
+/*
 
 Exempel
 Om vi döper funktionen till foo
