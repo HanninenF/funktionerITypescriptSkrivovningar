@@ -400,6 +400,37 @@ const getSumOfBiggestNumbers = (x: number[]): number => {
 };
 
 console.log(getSumOfBiggestNumbers(numbers));
+
+const getSumOfNumberOfBiggestNumbers = (x: number[], n: number): number => {
+  let sum: number = 0;
+
+  for (let i = 0; i < x.length; i++) {
+    console.log("// Yttre loop");
+    for (let j = 0; j < x.length - 1 - i; j++) {
+      console.log("// Inre loop"); //(skippa de sista redan sorterade elementen)
+      if (x[j] > x[j + 1]) {
+        // Om det nuvarande elementet är större än nästa
+        // Byt plats på elementen
+        const temp: number = x[j];
+        x[j] = x[j + 1];
+        x[j + 1] = temp;
+      }
+    }
+  }
+
+  console.log(`newNumbers: ${x}`);
+
+  const numbersToBeSummed = x.slice(-n);
+
+  numbersToBeSummed.forEach((number) => {
+    sum += number;
+    console.log(`number: ${number}`);
+  });
+
+  return sum;
+};
+
+console.log(getSumOfNumberOfBiggestNumbers(numbers, 3));
 /*
 Ord med bokstav
 Skriv en funktion som tar emot en array av ord och bokstaven b, sen returnerar en array med de ord som innehåller bokstaven b.
