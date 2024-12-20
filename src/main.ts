@@ -282,11 +282,15 @@ step = nästa element i arrayen är step större än elementet innan
 amount = antal siffror i arrayen (dvs dess length när arrayen är klar)
 Arrayen med siffror ska byggas med hjälp av dessa tre värden som funktionen tar emot.
 
-UTMANING: Funktionen tar emot ett objekt istället för tre siffror. Objektet har dessa tre siffror.
+
 
 */
 
-const getArrayFromNumbers = (x: number, y: number, z: number): number[] => {
+const getArrayFromThreeNumbers = (
+  x: number,
+  y: number,
+  z: number
+): number[] => {
   let numbersInput: number[] = [x, y, z];
   let sortedNumbers: number[] = [];
 
@@ -314,14 +318,55 @@ const getArrayFromNumbers = (x: number, y: number, z: number): number[] => {
     }
   });
 
-  sortedNumbers.push(smallestNumber);
-  sortedNumbers.push(middleNumber);
-  sortedNumbers.push(biggestNumber);
+  sortedNumbers.push(smallestNumber, middleNumber, biggestNumber);
 
   return sortedNumbers;
 };
 
-console.log(getArrayFromNumbers(99, 2345225342, 22));
+console.log(getArrayFromThreeNumbers(44, 89, 23323));
+
+//UTMANING: Funktionen tar emot ett objekt istället för tre siffror. Objektet har dessa tre siffror.
+
+type threeNumberObject = {
+  x: number;
+  y: number;
+  z: number;
+};
+
+const getArrayFromObject = (x: threeNumberObject): number[] => {
+  let numbersInput: number[] = [x.x, x.y, x.z];
+  let sortedNumbers: number[] = [];
+
+  let biggestNumber = Math.max(...numbersInput);
+  let middleNumber: number = 0;
+  let smallestNumber = Math.min(...numbersInput);
+
+  numbersInput.forEach((number) => {
+    if (number < smallestNumber) {
+      smallestNumber = number;
+    }
+  });
+
+  numbersInput.forEach((number) => {
+    if (number > biggestNumber) {
+      biggestNumber = number;
+    }
+  });
+
+  numbersInput.forEach((number) => {
+    if (number !== biggestNumber && number !== smallestNumber) {
+      {
+        middleNumber = number;
+      }
+    }
+  });
+
+  sortedNumbers.push(smallestNumber, middleNumber, biggestNumber);
+
+  return sortedNumbers;
+};
+
+console.log(getArrayFromObject({ x: 230000, y: 43, z: 3000 }));
 
 /*
 
@@ -339,6 +384,23 @@ Skriv en funktion som tar emot en array av siffror och returnerar summan av de t
 
 UTMANING: Skriv om funktionen så den tar emot en array av siffror och siffran n och returnerar summan av de n största talen i arrayen.
 
+
+*/
+const getSumOfBiggestNumbers = (x: number[]): number => {
+  let biggestNumber = Math.max(...x);
+  let newNumbers: number[] = [];
+  x.forEach((number) => {
+    if (number !== biggestNumber) {
+      newNumbers.push(number);
+    }
+  });
+  let secondBiggestNumber = Math.max(...newNumbers);
+
+  return biggestNumber + secondBiggestNumber;
+};
+
+console.log(getSumOfBiggestNumbers(numbers));
+/*
 Ord med bokstav
 Skriv en funktion som tar emot en array av ord och bokstaven b, sen returnerar en array med de ord som innehåller bokstaven b.
 
