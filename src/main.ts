@@ -219,6 +219,56 @@ const strings = [
   "doddle of birds",
   "doddle of birds", // 2 gånger
 ];
+
+const strings2 = [
+  "Hello",
+  "Hello", // 2 gånger
+  "World!",
+  "World!", // 2 gånger
+  "JavaScript",
+  "starlight",
+  "JavaScript",
+  "JavaScript", // 3 gånger
+  "awesome",
+  "awesome",
+  "awesome",
+  "awesome",
+  "awesome", // 5 gånger
+  "I love coding",
+  "I love coding", // 2 gånger
+  "short",
+  "short", // 2 gånger
+  "longer string here that says absolutely nothing",
+  "longer string here that says absolutely nothing", // 2 gånger
+  "example",
+  "example",
+  "example",
+  "example", // 4 gånger
+  "of",
+  "of",
+  "of", // 3 gånger
+  "different",
+  "different",
+  "different", // 3 gånger
+  "lengths",
+  "lengths",
+  "lengths", // 3 gånger
+  "arrays are great",
+  "arrays are great", // 2 gånger
+  "and fun",
+  "and fun", // 2 gånger
+  "JavaScript arrays",
+  "JavaScript arrays",
+  "JavaScript arrays", // 3 gånger
+  "best of the best",
+  "best of the best", // 2 gånger
+  "don't bother me",
+  "don't bother me", // 2 gånger
+  "alrighty",
+  "alrighty", // 2 gånger
+  "doddle of birds",
+  "doddle of birds", // 2 gånger
+];
 type AllowedStrings = (typeof stringType)[number];
 console.log(getLongestString(strings));
 
@@ -595,6 +645,31 @@ console.log(getNumbersWithoutDoubles(numbers));
 
 Inga dubletter av strängar
 Skriv en funktion som tar emot två arrayer av strängar och returnerar en ny array av strängar som är en sammanslagning av de båda arrayerna, men utan dubbletter.
+*/
+const getStringsWithoutDoublesFromTwoArrays = (
+  stringsInputX: string[],
+  stringsInputY: string[]
+): string[] => {
+  const stringsWithoutDoubles: string[] = [];
+
+  stringsInputX.forEach((str) => {
+    if (!stringsWithoutDoubles.includes(str)) {
+      stringsWithoutDoubles.push(str);
+    }
+  });
+
+  stringsInputY.forEach((str) => {
+    if (!stringsWithoutDoubles.includes(str)) {
+      stringsWithoutDoubles.push(str);
+    }
+  });
+
+  return stringsWithoutDoubles;
+};
+
+console.log(getStringsWithoutDoublesFromTwoArrays(strings, strings2));
+
+/*
 
 Börjar med
 Skriv en funktion som tar emot en array av strängar och en bokstav. Funktionen ska returnera en ny array med alla strängar som börjar med den angivna bokstaven.
