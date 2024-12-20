@@ -87,9 +87,51 @@ const getBiggestNumberFromNumbers = (numbers: number[]): number => {
 };
 
 const numbers = [
-  40886, 40620, 313, 5779, 7141, 18628, 18427, 20600, 18309, 33198, 22465,
-  19296, 25177, 622, 9272,
+  40886,
+  40886, // 2 gånger
+  40620,
+  40620, // 2 gånger
+  313,
+  313,
+  313, // 3 gånger
+  5779,
+  5779,
+  5779,
+  5779, // 4 gånger
+  7141,
+  7141, // 2 gånger
+  18628,
+  18628, // 2 gånger
+  18427,
+  18427,
+  18427, // 3 gånger
+  20600,
+  20600,
+  20600,
+  20600, // 4 gånger
+  18309,
+  18309, // 2 gånger
+  33198,
+  33198,
+  33198, // 3 gånger
+  22465,
+  22465,
+  22465,
+  22465, // 4 gånger
+  19296,
+  19296, // 2 gånger
+  25177,
+  25177, // 2 gånger
+  622,
+  622,
+  622, // 3 gånger
+  9272,
+  9272,
+  9272,
+  9272,
+  9272, // 5 gånger
 ];
+
 console.log(getBiggestNumberFromNumbers(numbers));
 
 /* 
@@ -131,24 +173,51 @@ const stringType = [
 
 const strings = [
   "Hello",
+  "Hello", // 2 gånger
   "World!",
+  "World!", // 2 gånger
   "JavaScript",
-  "is",
+  "JavaScript",
+  "JavaScript", // 3 gånger
   "awesome",
+  "awesome",
+  "awesome",
+  "awesome",
+  "awesome", // 5 gånger
   "I love coding",
+  "I love coding", // 2 gånger
   "short",
+  "short", // 2 gånger
   "longer string here that says absolutely nothing",
+  "longer string here that says absolutely nothing", // 2 gånger
   "example",
+  "example",
+  "example",
+  "example", // 4 gånger
   "of",
+  "of",
+  "of", // 3 gånger
   "different",
+  "different",
+  "different", // 3 gånger
   "lengths",
+  "lengths",
+  "lengths", // 3 gånger
   "arrays are great",
+  "arrays are great", // 2 gånger
   "and fun",
+  "and fun", // 2 gånger
   "JavaScript arrays",
+  "JavaScript arrays",
+  "JavaScript arrays", // 3 gånger
   "best of the best",
+  "best of the best", // 2 gånger
   "don't bother me",
+  "don't bother me", // 2 gånger
   "alrighty",
+  "alrighty", // 2 gånger
   "doddle of birds",
+  "doddle of birds", // 2 gånger
 ];
 type AllowedStrings = (typeof stringType)[number];
 console.log(getLongestString(strings));
@@ -481,12 +550,48 @@ const getSumOfBiggerThanNumber = (numbers: number[], num: number): number => {
 };
 
 console.log(getSumOfBiggerThanNumber(numbers, 23000));
+
 /*
 Räkna ett ord
 Skriv en funktion som tar emot en array av strängar och en specifik sträng. Funktionen ska returnera hur många gånger strängen förekommer i arrayen.
 
+*/
+const getCountOfstring = (
+  stringsInput: string[],
+  stringInput: string
+): number => {
+  let countOfString: number = 0;
+
+  stringsInput.forEach((string) => {
+    if (string === stringInput) {
+      countOfString++;
+    }
+  });
+
+  return countOfString;
+};
+
+console.log(getCountOfstring(strings, strings[4]));
+
+/*
+
 Inga dubletter
 Skriv en funktion som tar emot en array med siffror där vissa värden kan förekomma flera gånger. Funktionen ska returnera en ny array med endast de unika värdena.
+*/
+const getNumbersWithoutDoubles = (numbers: number[]): number[] => {
+  const numbersWithoutDoubles: number[] = [];
+
+  numbers.forEach((number) => {
+    if (!numbersWithoutDoubles.includes(number)) {
+      numbersWithoutDoubles.push(number);
+    }
+  });
+
+  return numbersWithoutDoubles;
+};
+
+console.log(getNumbersWithoutDoubles(numbers));
+/*
 
 Inga dubletter av strängar
 Skriv en funktion som tar emot två arrayer av strängar och returnerar en ny array av strängar som är en sammanslagning av de båda arrayerna, men utan dubbletter.
