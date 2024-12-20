@@ -145,6 +145,10 @@ const strings = [
   "arrays are great",
   "and fun",
   "JavaScript arrays",
+  "best of the best",
+  "don't bother me",
+  "alrighty",
+  "doddle of birds",
 ];
 type AllowedStrings = (typeof stringType)[number];
 console.log(getLongestString(strings));
@@ -435,6 +439,27 @@ console.log(getSumOfNumberOfBiggestNumbers(numbers, 3));
 Ord med bokstav
 Skriv en funktion som tar emot en array av ord och bokstaven b, sen returnerar en array med de ord som innehåller bokstaven b.
 
+
+*/
+const getStringsFromB = (
+  stringsInput: string[],
+  letter: string
+): string[] | string => {
+  let stringsFromB: string[] = [];
+
+  stringsInput.forEach((str) => {
+    if (str.includes(letter)) {
+      stringsFromB.push(str);
+    }
+  });
+
+  if (stringsFromB.length > 0) {
+    return stringsFromB;
+  } else return `there's no word with the letter ${letter}`;
+};
+
+console.log(getStringsFromB(strings, "f"));
+/*
 Summera större än n
 Skriv en funktion som tar emot en array av siffror och en siffra n. Funktionen ska returnera summan av alla siffror i arrayen som är större än n.
 
