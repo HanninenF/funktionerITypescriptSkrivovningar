@@ -463,6 +463,25 @@ console.log(getStringsFromB(strings, "f"));
 Summera större än n
 Skriv en funktion som tar emot en array av siffror och en siffra n. Funktionen ska returnera summan av alla siffror i arrayen som är större än n.
 
+*/
+const getSumOfBiggerThanNumber = (numbers: number[], num: number): number => {
+  let sum: number = 0;
+  const newNumbers: number[] = [];
+  numbers.forEach((number) => {
+    if (number > num) {
+      newNumbers.push(number);
+    }
+  });
+  console.log(newNumbers);
+  newNumbers.forEach((number) => {
+    sum += number;
+  });
+
+  return sum;
+};
+
+console.log(getSumOfBiggerThanNumber(numbers, 23000));
+/*
 Räkna ett ord
 Skriv en funktion som tar emot en array av strängar och en specifik sträng. Funktionen ska returnera hur många gånger strängen förekommer i arrayen.
 
