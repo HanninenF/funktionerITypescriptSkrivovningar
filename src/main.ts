@@ -1,4 +1,6 @@
 import "./style.scss";
+import people from "./people";
+import { Person } from "./types";
 /* Typa upp alla funktioner
 OBS! Alla funkttioner skall vara typade på både värdet som funktionen tar emot och det som returneras.
 
@@ -179,6 +181,7 @@ const strings = [
   "JavaScript",
   "JavaScript",
   "JavaScript", // 3 gånger
+  "another hour",
   "awesome",
   "awesome",
   "awesome",
@@ -674,17 +677,103 @@ console.log(getStringsWithoutDoublesFromTwoArrays(strings, strings2));
 Börjar med
 Skriv en funktion som tar emot en array av strängar och en bokstav. Funktionen ska returnera en ny array med alla strängar som börjar med den angivna bokstaven.
 
+*/
+const getStringsStartingWithLetter = (
+  stringsInput: string[],
+  letter: string
+): string[] => {
+  const stringsStartingWithLetter: string[] = [];
+
+  stringsInput.forEach((string) => {
+    if (string.charAt(0).toLowerCase() === letter.toLowerCase()) {
+      stringsStartingWithLetter.push(string);
+    }
+  });
+
+  return stringsStartingWithLetter;
+};
+
+console.log(getStringsStartingWithLetter(strings, "h"));
+/*
 UTMANING: Se till att funktionen kan hantera att arrayens strängar består av flera ord dvs om strängen är flera ord så ska vi plocka ut alla ord som börjar på den angivna bokstaven.
+*/
+const getStringsFromAllStringsStartingWithLetter = (
+  stringsInput: string[],
+  letter: string
+): string[] => {
+  const stringsStartingWithLetter: string[] = [];
+
+  stringsInput.forEach((string) => {
+    const words = string.split(" ");
+
+    words.forEach((word) => {
+      if (word.charAt(0).toLowerCase() === letter.charAt(0).toLowerCase()) {
+        stringsStartingWithLetter.push(string);
+      }
+    });
+  });
+
+  return stringsStartingWithLetter;
+};
+
+console.log(getStringsFromAllStringsStartingWithLetter(strings, "t"));
+
+/*
+
 
 Näst störst
 Skriv en funktion som tar emot en array av siffror och returnerar det näst största talet i arrayen.
+*/
+
+const numbersWithoutDoubles = getNumbersWithoutDoubles(numbers);
+
+const getSecondBiggestNumber = (numbersInput: number[]): number => {
+  const max = Math.max(...numbersInput);
+
+  numbersInput.forEach((number, index) => {
+    if (number === max) {
+      numbersInput.splice(index, 1); // Tar bort elementet vid index
+    }
+  });
+
+  const secondBiggestNumber: number = Math.max(...numbersInput);
+
+  return secondBiggestNumber;
+};
+
+console.log(getSecondBiggestNumber(numbersWithoutDoubles));
+
+/*
 
 Tema objekt
 18+
 Skriv en funktion som tar emot en array av objekt där varje objekt representerar en person med name och age. Returnera en ny array med personer som är över 18 år.
 
+
+*/
+
+const legalAge: number = 18;
+const getPersonsOverEighteen = (persons: Person[]): Person[] => {
+  const personOverEighteen: Person[] = [];
+
+  persons.forEach((person) => {
+    if (person.age > legalAge) {
+      personOverEighteen.push(person);
+    }
+  });
+
+  return personOverEighteen;
+};
+
+console.log(getPersonsOverEighteen(people));
+
+/*
 En viss hobby
 Skriv en funktion som tar emot en sträng h och en array av objekt där varje objekt representerar en person med name, age och hobbies. Hobbies är en array av strängar. Returnera en ny array med personer som har en viss hobby h.
+
+*/
+
+/*
 
 Summera från objekt
 Skriv en funktion som tar emot en sträng av djur-objekt som alla har namn och vikt. Funktionen returnerar summan av alla djurens vikt.
