@@ -1,6 +1,6 @@
 import "./style.scss";
-import people from "./people";
-import { Person } from "./types";
+import { people, animals } from "./data";
+import { Hobby, Person, Animal } from "./types";
 /* Typa upp alla funktioner
 OBS! Alla funkttioner skall vara typade på både värdet som funktionen tar emot och det som returneras.
 
@@ -772,11 +772,38 @@ En viss hobby
 Skriv en funktion som tar emot en sträng h och en array av objekt där varje objekt representerar en person med name, age och hobbies. Hobbies är en array av strängar. Returnera en ny array med personer som har en viss hobby h.
 
 */
+const getPersonsFromHobby = (persons: Person[], hobby: Hobby): Person[] => {
+  const personsFromHobby: Person[] = [];
+
+  persons.forEach((person) => {
+    if (person.hobbies?.includes(hobby)) {
+      personsFromHobby.push(person);
+    }
+  });
+
+  return personsFromHobby;
+};
+
+console.log(getPersonsFromHobby(people, "sewing"));
 
 /*
 
 Summera från objekt
 Skriv en funktion som tar emot en sträng av djur-objekt som alla har namn och vikt. Funktionen returnerar summan av alla djurens vikt.
+
+*/
+const sumOfAnimalsWeight = (animals: Animal[]): number => {
+  let sumOfAnimalsWeight: number = 0;
+  animals.forEach((animal) => {
+    sumOfAnimalsWeight += animal.weight;
+  });
+  return sumOfAnimalsWeight;
+};
+
+console.log(sumOfAnimalsWeight(animals));
+
+/*
+
 
 Cykel eller bil
 Skriv en funktion som tar emot ett objekt som antingen är av typen Vehicle (vilket är en bil eller en cykel). Funktionen ska returnera en beskrivande sträng baserat på vilken typ av fordon det är. Använd Narrowing i någon form.

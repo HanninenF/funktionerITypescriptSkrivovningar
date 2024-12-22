@@ -1,6 +1,6 @@
-import { Person } from "./types";
+import { Person, Animal } from "./types";
 
-const people: Person[] = [
+export const people: Person[] = [
   { name: "Janne", age: 17, hobbies: ["skateboarding", "gaming"] },
   { name: "Jolin", age: 18 },
   { name: "Moa", age: 19, hobbies: ["reading", "swimming"] },
@@ -23,13 +23,13 @@ const people: Person[] = [
   { name: "Quentin", age: 38 },
   { name: "Rebecca", age: 23, hobbies: ["volunteering", "dancing"] },
   { name: "Simon", age: 37 },
-  { name: "Tina", age: 41, hobbies: ["reading", "birdwatching"] },
+  { name: "Tina", age: 41, hobbies: ["reading", "birdwatching", "cycling"] },
   { name: "Uma", age: 30 },
   { name: "Victor", age: 29 },
   { name: "Wendy", age: 25, hobbies: ["running", "knitting"] },
   { name: "Xander", age: 28 },
   { name: "Yasmine", age: 33 },
-  { name: "Zach", age: 35, hobbies: ["fishing", "camping"] },
+  { name: "Zach", age: 35, hobbies: ["fishing", "camping", "sewing"] },
   { name: "Angela", age: 42 },
   { name: "Brian", age: 27 },
   { name: "Catherine", age: 40 },
@@ -49,4 +49,50 @@ const people: Person[] = [
   { name: "Sophia", age: 27, hobbies: ["surfing", "meditation"] },
 ];
 
-export default people;
+export const animals: Animal[] = [
+  { name: "Elephant", weight: 5400 },
+  { name: "Tiger", weight: 310 },
+  { name: "Kangaroo", weight: 85 },
+  { name: "Penguin", weight: 27 },
+  { name: "Eagle", weight: 6.5 },
+  { name: "Cheetah", weight: 72 },
+  { name: "Dolphin", weight: 300 },
+  { name: "Giraffe", weight: 800 },
+  { name: "Panda", weight: 100 },
+  { name: "Wolf", weight: 45 },
+];
+
+export const allowedHobbies = [
+  "skateboarding",
+  "gaming",
+  "reading",
+  "swimming",
+  "hiking",
+  "cooking",
+  "cycling",
+  "photography",
+  "gardening",
+  "painting",
+  "traveling",
+  "fitness",
+  "gaming",
+  "writing",
+  "yoga",
+  "sculpting",
+  "volunteering",
+  "dancing",
+  "reading",
+  "birdwatching",
+  "running",
+  "knitting",
+  "fishing",
+  "camping",
+  "woodworking",
+  "coding",
+  "sewing",
+  "drawing",
+  "reading",
+  "chess",
+  "surfing",
+  "meditation",
+] as const;
