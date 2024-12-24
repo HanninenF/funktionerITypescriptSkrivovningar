@@ -1,4 +1,4 @@
-import { Person, Animal } from "./types";
+import { Person, Animal, Car, Bike, Hero } from "./types";
 
 export const people: Person[] = [
   { name: "Janne", age: 17, hobbies: ["skateboarding", "gaming"] },
@@ -95,4 +95,73 @@ export const allowedHobbies = [
   "chess",
   "surfing",
   "meditation",
+] as const;
+
+export const vehicles: (Car | Bike)[] = [
+  {
+    brand: "Tesla",
+    color: "Red",
+    weight: 2000,
+    wheels: 4,
+    engine: "Electric",
+    seats: 5,
+    doors: 4,
+    description: "",
+  },
+  {
+    brand: "Volvo",
+    color: "Black",
+    weight: 1800,
+    wheels: 4,
+    engine: "Diesel",
+    seats: 7,
+    doors: 5,
+    description: "",
+  },
+  {
+    brand: "Giant",
+    color: "Blue",
+    weight: 12,
+    wheels: 2,
+    type: "mountain",
+    hasBasket: false,
+    hasBell: true,
+    hasLights: true,
+    description: "",
+  },
+  {
+    brand: "Specialized",
+    color: "Green",
+    weight: 10,
+    wheels: 2,
+    type: "road",
+    hasBasket: false,
+    hasBell: false,
+    hasLights: true,
+    description: "",
+  },
+  {
+    brand: "Canyon",
+    color: "Yellow",
+    weight: 15,
+    wheels: 2,
+    type: "electric",
+    hasBasket: true,
+    hasBell: true,
+    hasLights: true,
+    description: "",
+  },
+] as const;
+
+export const heroes: Hero[] = [
+  { name: "Arthas", Occupation: "Paladin", level: 45 },
+  { name: "Jaina", Occupation: "Mage", level: 50 },
+  { name: "Thrall", Occupation: "Shaman", level: 48 },
+  { name: "Tyrande", Occupation: "Priest", level: 46 },
+  { name: "Illidan", Occupation: "Demon Hunter", level: 55 },
+  { name: "Sylvanas", Occupation: "Ranger", level: 52 },
+  { name: "Anduin", Occupation: "Priest", level: 40 },
+  { name: "Malfurion", Occupation: "Druid", level: 47 },
+  { name: "Valeera", Occupation: "Rogue", level: 43 },
+  { name: "Kael'thas", Occupation: "Mage", level: 49 },
 ] as const;

@@ -1,6 +1,6 @@
 import "./style.scss";
-import { people, animals } from "./data";
-import { Hobby, Person, Animal } from "./types";
+import { people, animals, vehicles, heroes } from "./data";
+import { Hobby, Person, Animal, Vehicle, Bike, Car, Hero } from "./types";
 /* Typa upp alla funktioner
 OBS! Alla funkttioner skall vara typade på både värdet som funktionen tar emot och det som returneras.
 
@@ -805,10 +805,66 @@ console.log(sumOfAnimalsWeight(animals));
 /*
 
 
+
+
+Cykel eller bil
+Skriv en funktion som tar emot ett objekt som antingen är av typen Vehicle (vilket är en bil eller en cykel). Funktionen ska returnera en beskrivande sträng baserat på vilken typ av fordon det är. Använd Narrowing i någon form.
+*/
+
+const isBike = (vehicle: Vehicle): vehicle is Bike => {
+  return "type" in vehicle;
+};
+
+const getVehicleInfo = (VehicleInput: Vehicle): string => {
+  if (isBike(VehicleInput)) {
+    // Skapa en lokal description istället för att ändra på originalobjektet
+    let description = `${VehicleInput.description}`;
+    if (VehicleInput.hasBasket) description += "\nIt is equipped with a basket";
+    if (VehicleInput.hasBell) description += "\nIt is equipped with a bell";
+    if (VehicleInput.hasLights) description += "\nIt is equipped with lights";
+    const bikeInfo = `Brand: ${VehicleInput.brand}\nColor: ${VehicleInput.color}\nType: ${VehicleInput.type}\nWeight: ${VehicleInput.weight}\nWheels: ${VehicleInput.wheels}\n${description}`;
+    return bikeInfo;
+  } else {
+    const carInfo = VehicleInput.brand;
+    return carInfo;
+  }
+};
+
+console.log(getVehicleInfo(vehicles[3]));
+
+/* let fooA = function (i: number): number {
+  return 2 * i * i;
+};
+
+let goo = function (x: Function, y: number) {
+  return x(y); //2*i*i(3  )
+};
+
+let a = goo(fooA, 3);
+console.log(a); */
+
+/* let a: number = 5;
+
+function fooB() {
+  return ++a;
+}
+
+a += fooB() * 2;
+console.log(a); */
+/*
+
 Cykel eller bil
 Skriv en funktion som tar emot ett objekt som antingen är av typen Vehicle (vilket är en bil eller en cykel). Funktionen ska returnera en beskrivande sträng baserat på vilken typ av fordon det är. Använd Narrowing i någon form.
 
 UTMANING: Lös uppgiften en gång till men på ett annat sätt! Narrowing går lösa på flera sätt.
+*/
+const getInfoFromVehicle = (vehicleInput: Bike | Car): string => {
+  if ("type" in vehicleInput) {
+    return vehicleInput.brand;
+  } else return vehicleInput.color;
+};
+console.log(getInfoFromVehicle(vehicles[2]));
+/*
 
 Tips Vehicle-typen
 type Car = { type: "car"; brand: string; horsepower: number };
@@ -817,6 +873,24 @@ type Bike = { type: "bike"; brand: string; gears: number };
 type Vehicle = Car | Bike;
 Största hjälten
 Skriv en funktion som tar emot en array av Hero-objekt. Varje hjälte har ett namn, yrke och level. Funktionen returnerar det objekt med högst level.
+
+*/
+
+const getHighestLevelHero = (heroes: Hero[]): Hero => {
+  let highestLevelHero: Hero = { name: "", Occupation: "", level: 0 };
+
+  heroes.forEach((hero) => {
+    if (hero.level > highestLevelHero.level) {
+      highestLevelHero = hero;
+    }
+  });
+
+  return highestLevelHero;
+};
+
+console.log(getHighestLevelHero(heroes));
+
+/*
 
 UTMANING: Skriv en ny version av funktionen som returnerar en array av Hero-objekt som är sorterade på level fallande, dvs den hjälte med högst level kommer först i arrayen.
 
