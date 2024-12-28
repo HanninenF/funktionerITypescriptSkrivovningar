@@ -1,6 +1,16 @@
 import "./style.scss";
 import { people, animals, vehicles, heroes } from "./data";
-import { Hobby, Person, Animal, Vehicle, Bike, Car, Hero } from "./types";
+import {
+  Hobby,
+  Person,
+  Animal,
+  Vehicle,
+  Bike,
+  Car,
+  Hero,
+  AllowedOccupation,
+} from "./types";
+import { NULL } from "sass";
 /* Typa upp alla funktioner
 OBS! Alla funkttioner skall vara typade på både värdet som funktionen tar emot och det som returneras.
 
@@ -876,6 +886,20 @@ Skriv en funktion som tar emot en array av Hero-objekt. Varje hjälte har ett na
 
 */
 
+const heroJanne: Hero = {
+  name: "Super-Janne",
+  Occupation: "Priest",
+  level: 89,
+};
+
+const KlantOla: Hero = {
+  name: "KlantOla",
+  Occupation: "Rogue",
+  level: 2,
+};
+
+heroes.push(heroJanne, KlantOla);
+
 const getHighestLevelHero = (heroes: Hero[]): Hero => {
   let highestLevelHero: Hero = { name: "", Occupation: "", level: 0 };
 
@@ -888,8 +912,151 @@ const getHighestLevelHero = (heroes: Hero[]): Hero => {
   return highestLevelHero;
 };
 
+const getLowestLevelHero = (heroes: Hero[]): Hero => {
+  let highestLevelHero: Hero = { name: "", Occupation: "", level: Infinity };
+
+  heroes.forEach((hero) => {
+    if (hero.level < highestLevelHero.level) {
+      highestLevelHero = hero;
+    }
+  });
+
+  return highestLevelHero;
+};
+
 console.log(getHighestLevelHero(heroes));
 
+console.log(getLowestLevelHero(heroes));
+
+console.log();
+
+//Hjälte av yrke
+//Skriv en funktion som tar emot en array av Hero-objekt och ett yrke. Varje hjälte har ett namn, yrke och level. Funktionen returnerar en array av objekt med de som har matchande yrke.
+
+const getHeroesByOccupation = (
+  heroes: Hero[],
+  occupation: AllowedOccupation
+): Hero[] => {
+  const heroesByOccupation: Hero[] = [];
+
+  heroes.forEach((hero) => {
+    if (hero.Occupation === occupation) {
+      heroesByOccupation.push(hero);
+    }
+  });
+
+  return heroesByOccupation;
+};
+
+console.log(getHeroesByOccupation(heroes, "Mage"));
+
+const divElement = document.querySelector("#app") as HTMLElement;
+const selectElement = document.createElement("select") as HTMLSelectElement;
+selectElement.id = "input";
+
+selectElement.name = "level";
+
+const highestLevelOptionElement = document.createElement(
+  "option"
+) as HTMLOptionElement;
+highestLevelOptionElement.value = "highest level";
+highestLevelOptionElement.textContent = "highest level";
+
+const lowestLevelOptionElement = document.createElement(
+  "option"
+) as HTMLOptionElement;
+lowestLevelOptionElement.value = "lowest level";
+lowestLevelOptionElement.textContent = "lowest level";
+
+divElement.appendChild(selectElement);
+selectElement.append(highestLevelOptionElement, lowestLevelOptionElement);
+
+const buttonElement = document.createElement("button") as HTMLButtonElement;
+const getHero = document.createElement("button") as HTMLButtonElement;
+getHero.textContent = "get hero";
+buttonElement.textContent = "get hero";
+divElement.appendChild(buttonElement);
+
+const divMiddle = document.querySelector("#middle") as HTMLElement;
+divMiddle.appendChild(getHero);
+
+const highestLevelHero = getHighestLevelHero(heroes);
+const lowestLevelHero = getLowestLevelHero(heroes);
+
+const mageHeroes = getHeroesByOccupation(heroes, "Mage");
+const demonshunterHeroes = getHeroesByOccupation(heroes, "Demon Hunter");
+const rougeHeroes = getHeroesByOccupation(heroes, "Rogue");
+const paladinHeroes = getHeroesByOccupation(heroes, "Paladin");
+const priestHeroes = getHeroesByOccupation(heroes, "Priest");
+const druidHeroes = getHeroesByOccupation(heroes, "Druid");
+const rangerHeroes = getHeroesByOccupation(heroes, "Ranger");
+const shamanHeroes = getHeroesByOccupation(heroes, "Shaman");
+
+const ulElement = document.createElement("ul") as HTMLUListElement;
+const heroNameLiElement = document.createElement("li") as HTMLLIElement;
+const heroOccupationLiElement = document.createElement("li") as HTMLLIElement;
+const heroLevelLiElement = document.createElement("li") as HTMLElement;
+
+const selectOccupation = document.querySelector(
+  "#selectMiddle"
+) as HTMLSelectElement;
+
+buttonElement.addEventListener("click", (e) => {
+  e.preventDefault();
+
+  heroNameLiElement.textContent = "";
+  heroOccupationLiElement.textContent = "";
+  heroLevelLiElement.textContent = "";
+  if (selectElement.value.includes("high")) {
+    heroNameLiElement.textContent = highestLevelHero.name;
+    heroOccupationLiElement.textContent = highestLevelHero.Occupation;
+    heroLevelLiElement.textContent = highestLevelHero.level.toString();
+    heroLevelLiElement.id = "currentLevel";
+    heroOccupationLiElement.id = "currentOccupation";
+    heroNameLiElement.id = "currentName";
+
+    divElement.append(ulElement);
+    ulElement.appendChild(heroNameLiElement);
+    ulElement.appendChild(heroOccupationLiElement);
+    ulElement.appendChild(heroLevelLiElement);
+  }
+
+  if (selectElement.value.includes("low")) {
+    heroNameLiElement.textContent = lowestLevelHero.name;
+    heroOccupationLiElement.textContent = lowestLevelHero.Occupation;
+    heroLevelLiElement.textContent = lowestLevelHero.level.toString();
+
+    heroOccupationLiElement.id = "currentOccupation";
+    heroLevelLiElement.id = "currentLevel";
+
+    divElement.appendChild(ulElement);
+    ulElement.appendChild(heroNameLiElement);
+    ulElement.appendChild(heroOccupationLiElement);
+    ulElement.appendChild(heroLevelLiElement);
+  }
+});
+
+getHero.addEventListener("click", (e) => {
+  e.preventDefault();
+  ulElement.innerHTML = "";
+  heroNameLiElement.textContent = "";
+  heroOccupationLiElement.textContent = "";
+  heroLevelLiElement.textContent = "";
+
+  const heroesByOccupation: Hero[] = getHeroesByOccupation(
+    heroes,
+    selectOccupation.value as AllowedOccupation
+  );
+
+  console.log(`selectedHeroesFromOccupation= `, heroesByOccupation);
+  heroesByOccupation.forEach((hero) => {
+    const heroInfo = document.createElement("li") as HTMLLIElement;
+    heroInfo.textContent = `Name: ${hero.name}\nOccupation: ${hero.Occupation}\nLevel: ${hero.level}\n-------------`;
+
+    divMiddle.appendChild(ulElement);
+    ulElement.appendChild(heroInfo);
+  });
+});
 /*
 
 UTMANING: Skriv en ny version av funktionen som returnerar en array av Hero-objekt som är sorterade på level fallande, dvs den hjälte med högst level kommer först i arrayen.

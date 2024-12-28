@@ -3,6 +3,41 @@ html {
   color: beige;
 }
 
+#app {
+  ul {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  li {
+    font-size: 2rem;
+    display: block;
+    grid-area: 1 / 2 / 2 / 3;
+  }
+
+  #currentOccupation {
+    grid-area: 2/2/3/3;
+  }
+
+  #currentLevel {
+    grid-area: 3/2/4/3;
+  }
+}
+
+#middle {
+  ul {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  li {
+    white-space: pre-wrap;
+    font-size: 2rem;
+    display: block;
+    grid-area: auto;
+  }
+}
+
 @media (prefers-color-scheme: light) {
   :root {
     color: #213547;

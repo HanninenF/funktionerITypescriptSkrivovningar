@@ -1,4 +1,4 @@
-import { allowedHobbies } from "./data";
+import { allowedHobbies, allowedOccupations } from "./data";
 
 export type Animal = {
   name: string;
@@ -36,6 +36,8 @@ export type Bike = Vehicle & {
 
 export type Hero = {
   name: string;
-  Occupation: string;
+  Occupation: AllowedOccupation;
   level: number;
 };
+
+export type AllowedOccupation = (typeof allowedOccupations)[number];

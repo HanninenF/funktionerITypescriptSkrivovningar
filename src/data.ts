@@ -151,7 +151,7 @@ export const vehicles: (Car | Bike)[] = [
     hasLights: true,
     description: "",
   },
-] as const;
+];
 
 export const heroes: Hero[] = [
   { name: "Arthas", Occupation: "Paladin", level: 45 },
@@ -164,4 +164,16 @@ export const heroes: Hero[] = [
   { name: "Malfurion", Occupation: "Druid", level: 47 },
   { name: "Valeera", Occupation: "Rogue", level: 43 },
   { name: "Kael'thas", Occupation: "Mage", level: 49 },
+];
+
+export const allowedOccupations = [
+  "",
+  "Paladin",
+  "Mage",
+  "Shaman",
+  "Priest",
+  "Demon Hunter",
+  "Ranger",
+  "Druid",
+  "Rogue",
 ] as const;
