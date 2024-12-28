@@ -540,6 +540,7 @@ console.log(getSumOfBiggestNumbers(numbers));
 const getSumOfNumberOfBiggestNumbers = (x: number[], n: number): number => {
   let sum: number = 0;
 
+  //bubble sort
   for (let i = 0; i < x.length; i++) {
     console.log("// Yttre loop");
     for (let j = 0; j < x.length - 1 - i; j++) {
@@ -983,15 +984,6 @@ divMiddle.appendChild(getHero);
 const highestLevelHero = getHighestLevelHero(heroes);
 const lowestLevelHero = getLowestLevelHero(heroes);
 
-const mageHeroes = getHeroesByOccupation(heroes, "Mage");
-const demonshunterHeroes = getHeroesByOccupation(heroes, "Demon Hunter");
-const rougeHeroes = getHeroesByOccupation(heroes, "Rogue");
-const paladinHeroes = getHeroesByOccupation(heroes, "Paladin");
-const priestHeroes = getHeroesByOccupation(heroes, "Priest");
-const druidHeroes = getHeroesByOccupation(heroes, "Druid");
-const rangerHeroes = getHeroesByOccupation(heroes, "Ranger");
-const shamanHeroes = getHeroesByOccupation(heroes, "Shaman");
-
 const ulElement = document.createElement("ul") as HTMLUListElement;
 const heroNameLiElement = document.createElement("li") as HTMLLIElement;
 const heroOccupationLiElement = document.createElement("li") as HTMLLIElement;
@@ -1060,6 +1052,27 @@ getHero.addEventListener("click", (e) => {
 /*
 
 UTMANING: Skriv en ny version av funktionen som returnerar en array av Hero-objekt som är sorterade på level fallande, dvs den hjälte med högst level kommer först i arrayen.
+
+*/
+
+const getBestToWorstHeroes = (heroes: Hero[]): Hero[] => {
+  //bubble sort
+  for (let i = 0; i < heroes.length; i++) {
+    for (let j = 0; j < heroes.length - 1 - i; j++) {
+      if (heroes[j].level < heroes[j + 1].level) {
+        const temp: Hero = heroes[j];
+        heroes[j] = heroes[j + 1];
+        heroes[j + 1] = temp;
+      }
+    }
+  }
+
+  return heroes;
+};
+
+console.log(getBestToWorstHeroes(heroes));
+
+/*
 
 Bloggpost per thing
 Vi har en array av Blogginlägg-objekt. Ett inlägg har titel, body, datum, författare och kategori.
