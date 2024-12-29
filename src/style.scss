@@ -10,21 +10,38 @@ html {
   }
 
   li {
+    white-space: pre-wrap;
     font-size: 2rem;
     display: block;
-    grid-area: 1 / 2 / 2 / 3;
+    grid-area: auto;
   }
 
   #currentOccupation {
-    grid-area: 2/2/3/3;
+    white-space: pre-wrap;
+    grid-area: auto;
   }
 
   #currentLevel {
-    grid-area: 3/2/4/3;
+    white-space: pre-wrap;
+    grid-area: auto;
   }
 }
 
 #middle {
+  ul {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  li {
+    white-space: pre-wrap;
+    font-size: 2rem;
+    display: block;
+    grid-area: auto;
+  }
+}
+
+#down {
   ul {
     display: grid;
     grid-template-columns: repeat(2, 1fr);

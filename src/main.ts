@@ -914,15 +914,15 @@ const getHighestLevelHero = (heroes: Hero[]): Hero => {
 };
 
 const getLowestLevelHero = (heroes: Hero[]): Hero => {
-  let highestLevelHero: Hero = { name: "", Occupation: "", level: Infinity };
+  let lowestLevelHero: Hero = { name: "", Occupation: "", level: Infinity };
 
   heroes.forEach((hero) => {
-    if (hero.level < highestLevelHero.level) {
-      highestLevelHero = hero;
+    if (hero.level < lowestLevelHero.level) {
+      lowestLevelHero = hero;
     }
   });
 
-  return highestLevelHero;
+  return lowestLevelHero;
 };
 
 console.log(getHighestLevelHero(heroes));
@@ -1071,6 +1071,34 @@ const getBestToWorstHeroes = (heroes: Hero[]): Hero[] => {
 };
 
 console.log(getBestToWorstHeroes(heroes));
+
+const getMostAverageHero = (heroes: Hero[]): Hero => {
+  const sortedHeroes: Hero[] = getBestToWorstHeroes(heroes);
+  const mostAverageHeroIndex: number = sortedHeroes.length / 2 - 1;
+
+  const mostAverageHero: Hero = sortedHeroes[mostAverageHeroIndex];
+
+  return mostAverageHero;
+};
+
+console.log(getMostAverageHero(heroes));
+
+const downDiv = document.querySelector("#down") as HTMLDivElement;
+
+const getHeroButton = document.querySelector(
+  "#getAverage"
+) as HTMLButtonElement;
+
+getHeroButton.addEventListener("click", (e) => {
+  e.preventDefault();
+
+  heroNameLiElement.textContent = "";
+  const mostAverageHero = getMostAverageHero(heroes);
+  heroNameLiElement.textContent = `Name: ${mostAverageHero.name}\nOccupation: ${mostAverageHero.Occupation}\nLevel: ${mostAverageHero.level}`;
+
+  downDiv.appendChild(ulElement);
+  ulElement.appendChild(heroNameLiElement);
+});
 
 /*
 
