@@ -161,6 +161,7 @@ export const heroes: Hero[] = [
   { name: "Illidan", Occupation: "Demon Hunter", level: 55 },
   { name: "Sylvanas", Occupation: "Ranger", level: 52 },
   { name: "Anduin", Occupation: "Priest", level: 40 },
+  { name: "Anna", Occupation: "Ranger", level: 2 },
   { name: "Malfurion", Occupation: "Druid", level: 47 },
   { name: "Valeera", Occupation: "Rogue", level: 43 },
   { name: "Kael'thas", Occupation: "Mage", level: 49 },

@@ -1072,13 +1072,32 @@ const getBestToWorstHeroes = (heroes: Hero[]): Hero[] => {
 
 console.log(getBestToWorstHeroes(heroes));
 
-const getMostAverageHero = (heroes: Hero[]): Hero => {
-  const sortedHeroes: Hero[] = getBestToWorstHeroes(heroes);
-  const mostAverageHeroIndex: number = sortedHeroes.length / 2 - 1;
+const getMostAverageHero = (heroes: Hero[]): Hero[] => {
+  let medianLevelHero: number = 0;
+  heroes.forEach((hero) => {
+    medianLevelHero += hero.level;
+  });
+  medianLevelHero = Math.round(medianLevelHero / heroes.length);
 
-  const mostAverageHero: Hero = sortedHeroes[mostAverageHeroIndex];
+  console.log(medianLevelHero);
 
-  return mostAverageHero;
+  let closestHeroes: Hero[] = [];
+  let smallestDifference = Infinity;
+
+  heroes.forEach((hero) => {
+    const difference = Math.abs(hero.level - medianLevelHero);
+
+    if (difference < smallestDifference) {
+      // Uppdatera till en ny lista om en mindre skillnad hittas
+      smallestDifference = difference;
+      closestHeroes = [hero];
+    } else if (difference === smallestDifference) {
+      // Lägg till hjälten om skillnaden är densamma som den minsta
+      closestHeroes.push(hero);
+    }
+  });
+
+  return closestHeroes;
 };
 
 console.log(getMostAverageHero(heroes));
@@ -1091,13 +1110,15 @@ const getHeroButton = document.querySelector(
 
 getHeroButton.addEventListener("click", (e) => {
   e.preventDefault();
-
+  downDiv.appendChild(ulElement);
   heroNameLiElement.textContent = "";
   const mostAverageHero = getMostAverageHero(heroes);
-  heroNameLiElement.textContent = `Name: ${mostAverageHero.name}\nOccupation: ${mostAverageHero.Occupation}\nLevel: ${mostAverageHero.level}`;
+  mostAverageHero.forEach((hero) => {
+    const heroNameLiElement = document.createElement("li") as HTMLLIElement;
+    heroNameLiElement.textContent = `Name: ${hero.name}\nOccupation: ${hero.Occupation}\nLevel: ${hero.level}`;
 
-  downDiv.appendChild(ulElement);
-  ulElement.appendChild(heroNameLiElement);
+    ulElement.appendChild(heroNameLiElement);
+  });
 });
 
 /*
