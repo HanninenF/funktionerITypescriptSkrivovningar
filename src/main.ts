@@ -1193,4 +1193,40 @@ console.log(getAuthors(blogPosts));
 
 Skriv en funktion som tar emot arrayen och returnerar en array med alla kategorier.
 
+*/
+const getCategories = (blogPosts: BlogPost[]): AllowedCategories[] => {
+  const categories: AllowedCategories[] = [];
+
+  blogPosts.forEach((post) => {
+    categories.push(post.category);
+  });
+
+  console.log(categories);
+  return categories;
+};
+
+console.log(getCategories(blogPosts));
+
+/*
+
 Skriv en funktion som tar emot arrayen och returnerar det senaste inlägget. */
+
+const getLatestPost = (blogPosts: BlogPost[]): BlogPost => {
+  let latestPost: BlogPost = {
+    title: "",
+    body: "",
+    date: "",
+    author: "",
+    category: "",
+  };
+
+  blogPosts.forEach((post) => {
+    if (post.date > latestPost.date) {
+      latestPost = post;
+    }
+  });
+
+  return latestPost;
+};
+
+console.log(getLatestPost(blogPosts));

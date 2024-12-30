@@ -250,9 +250,17 @@ export const blogPosts: BlogPost[] = [
     author: "Daniel White",
     category: "Health",
   },
+  {
+    title: "Don't joke about this",
+    body: "It's not good to joke about things that are not funny",
+    date: "2025-01-23",
+    author: "Daniel White",
+    category: "Lifestyle",
+  },
 ];
 
 export const allowedCategories = [
+  "",
   "Technology",
   "Productivity",
   "Lifestyle",
@@ -263,6 +271,7 @@ export const allowedCategories = [
 ] as const;
 
 export const allowedAuthors = [
+  "",
   "Jane Doe",
   "John Smith",
   "Emily Brown",
