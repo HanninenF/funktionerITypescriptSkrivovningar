@@ -1,5 +1,5 @@
 import "./style.scss";
-import { people, animals, vehicles, heroes } from "./data";
+import { people, animals, vehicles, heroes, BlogPost, blogPosts } from "./data";
 import {
   Hobby,
   Person,
@@ -9,6 +9,7 @@ import {
   Car,
   Hero,
   AllowedOccupation,
+  AllowedCategories,
 } from "./types";
 import { NULL } from "sass";
 /* Typa upp alla funktioner
@@ -1072,35 +1073,35 @@ const getBestToWorstHeroes = (heroes: Hero[]): Hero[] => {
 
 console.log(getBestToWorstHeroes(heroes));
 
-const getMostAverageHero = (heroes: Hero[]): Hero[] => {
-  let medianLevelHero: number = 0;
+const getMostAverageHeroes = (heroes: Hero[]): Hero[] => {
+  let averageLevelHero: number = 0;
   heroes.forEach((hero) => {
-    medianLevelHero += hero.level;
+    averageLevelHero += hero.level;
   });
-  medianLevelHero = Math.round(medianLevelHero / heroes.length);
+  averageLevelHero = Math.round(averageLevelHero / heroes.length);
 
-  console.log(medianLevelHero);
+  console.log(averageLevelHero);
 
-  let closestHeroes: Hero[] = [];
-  let smallestDifference = Infinity;
+  let mostAverageHeroes: Hero[] = [];
+  let smallestDifference: number = Infinity;
 
   heroes.forEach((hero) => {
-    const difference = Math.abs(hero.level - medianLevelHero);
+    const difference: number = Math.abs(hero.level - averageLevelHero);
 
     if (difference < smallestDifference) {
       // Uppdatera till en ny lista om en mindre skillnad hittas
       smallestDifference = difference;
-      closestHeroes = [hero];
+      mostAverageHeroes = [hero];
     } else if (difference === smallestDifference) {
       // Lägg till hjälten om skillnaden är densamma som den minsta
-      closestHeroes.push(hero);
+      mostAverageHeroes.push(hero);
     }
   });
 
-  return closestHeroes;
+  return mostAverageHeroes;
 };
 
-console.log(getMostAverageHero(heroes));
+console.log(getMostAverageHeroes(heroes));
 
 const downDiv = document.querySelector("#down") as HTMLDivElement;
 
@@ -1112,12 +1113,12 @@ getHeroButton.addEventListener("click", (e) => {
   e.preventDefault();
   downDiv.appendChild(ulElement);
   heroNameLiElement.textContent = "";
-  const mostAverageHero = getMostAverageHero(heroes);
-  mostAverageHero.forEach((hero) => {
-    const heroNameLiElement = document.createElement("li") as HTMLLIElement;
-    heroNameLiElement.textContent = `Name: ${hero.name}\nOccupation: ${hero.Occupation}\nLevel: ${hero.level}`;
+  const mostAverageHeroes = getMostAverageHeroes(heroes);
+  mostAverageHeroes.forEach((hero) => {
+    const heroLiElement = document.createElement("li") as HTMLLIElement;
+    heroLiElement.textContent = `Name: ${hero.name}\nOccupation: ${hero.Occupation}\nLevel: ${hero.level}`;
 
-    ulElement.appendChild(heroNameLiElement);
+    ulElement.appendChild(heroLiElement);
   });
 });
 
@@ -1125,9 +1126,29 @@ getHeroButton.addEventListener("click", (e) => {
 
 Bloggpost per thing
 Vi har en array av Blogginlägg-objekt. Ett inlägg har titel, body, datum, författare och kategori.
+*/
 
+/*
 Skriv en funktion som tar emot arrayen och en kategori-sträng och returnerar alla inlägg inom kategorin.
+*/
+const getPostsFromCategory = (
+  blogPosts: BlogPost[],
+  category: AllowedCategories
+): BlogPost[] => {
+  const PostsFromCategory: BlogPost[] = [];
 
+  blogPosts.forEach((post) => {
+    if (post.category === category) {
+      PostsFromCategory.push(post);
+    }
+  });
+
+  return PostsFromCategory;
+};
+
+console.log(getPostsFromCategory(blogPosts, "Technology"));
+
+/*
 Skriv en funktion som tar emot arrayen och en författare-sträng och returnerar alla inlägg med den författaren.
 
 Skriv en funktion som tar emot arrayen och returnerar en array med alla författare.

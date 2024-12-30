@@ -178,3 +178,96 @@ export const allowedOccupations = [
   "Druid",
   "Rogue",
 ] as const;
+
+export type BlogPost = {
+  title: string;
+  body: string;
+  date: string;
+  author: string;
+  category: string;
+};
+
+export const blogPosts: BlogPost[] = [
+  {
+    title: "The Rise of TypeScript",
+    body: "TypeScript has become one of the most popular languages for modern web development...",
+    date: "2024-12-01",
+    author: "Jane Doe",
+    category: "Technology",
+  },
+  {
+    title: "10 Tips for Staying Productive",
+    body: "Productivity is essential for success. Here are 10 tips to help you stay on track...",
+    date: "2024-11-28",
+    author: "John Smith",
+    category: "Productivity",
+  },
+  {
+    title: "The Art of Minimalism",
+    body: "Minimalism isn't just a design trend; it's a lifestyle choice. Learn how to live simply...",
+    date: "2024-11-20",
+    author: "Emily Brown",
+    category: "Lifestyle",
+  },
+  {
+    title: "Exploring the Great Outdoors",
+    body: "There's nothing quite like a weekend hike to reconnect with nature...",
+    date: "2024-11-15",
+    author: "Michael Johnson",
+    category: "Travel",
+  },
+  {
+    title: "Healthy Eating Habits",
+    body: "Eating healthy doesn't have to be complicated. Start with these simple tips...",
+    date: "2024-11-10",
+    author: "Sarah Lee",
+    category: "Health",
+  },
+  {
+    title: "Top 5 Programming Frameworks in 2024",
+    body: "With so many frameworks available, these 5 stand out in 2024...",
+    date: "2024-12-02",
+    author: "Chris Evans",
+    category: "Programming",
+  },
+  {
+    title: "How to Master Public Speaking",
+    body: "Public speaking is a crucial skill. Here's how to gain confidence and connect with your audience...",
+    date: "2024-11-05",
+    author: "Amy Wilson",
+    category: "Education",
+  },
+  {
+    title: "Traveling on a Budget",
+    body: "You don't need to be rich to travel. Here are tips for seeing the world without breaking the bank...",
+    date: "2024-11-01",
+    author: "Tom Harris",
+    category: "Travel",
+  },
+  {
+    title: "The Future of Artificial Intelligence",
+    body: "AI continues to evolve rapidly. What can we expect in the next decade? Here's an analysis...",
+    date: "2024-12-10",
+    author: "Sophia Green",
+    category: "Technology",
+  },
+  {
+    title: "Mindfulness for Stress Relief",
+    body: "Mindfulness practices can help you reduce stress and improve your mental well-being...",
+    date: "2024-11-18",
+    author: "Daniel White",
+    category: "Health",
+  },
+];
+
+export const allowedCategories = [
+  "Technology",
+  "Productivity",
+  "Lifestyle",
+  "Travel",
+  "Health",
+  "Programming",
+  "Education",
+] as const;
+
+export type AllowedCategories = (typeof allowedCategories)[number];
