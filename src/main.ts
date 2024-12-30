@@ -1,5 +1,5 @@
 import "./style.scss";
-import { people, animals, vehicles, heroes, BlogPost, blogPosts } from "./data";
+import { people, animals, vehicles, heroes, blogPosts } from "./data";
 import {
   Hobby,
   Person,
@@ -8,11 +8,12 @@ import {
   Bike,
   Car,
   Hero,
+  BlogPost,
   AllowedOccupation,
   AllowedCategories,
   AllowedAuthors,
 } from "./types";
-import { NULL } from "sass";
+
 /* Typa upp alla funktioner
 OBS! Alla funkttioner skall vara typade på både värdet som funktionen tar emot och det som returneras.
 
@@ -1175,6 +1176,20 @@ console.log(getPostsFromAuthor(blogPosts, "Jane Doe"));
 
 
 Skriv en funktion som tar emot arrayen och returnerar en array med alla författare.
+
+*/
+const getAuthors = (blogPosts: BlogPost[]): AllowedAuthors[] => {
+  const authors: AllowedAuthors[] = [];
+  blogPosts.forEach((post) => {
+    authors.push(post.author);
+  });
+
+  return authors;
+};
+
+console.log(getAuthors(blogPosts));
+
+/*
 
 Skriv en funktion som tar emot arrayen och returnerar en array med alla kategorier.
 
