@@ -10,6 +10,7 @@ import {
   Hero,
   AllowedOccupation,
   AllowedCategories,
+  AllowedAuthors,
 } from "./types";
 import { NULL } from "sass";
 /* Typa upp alla funktioner
@@ -1150,6 +1151,28 @@ console.log(getPostsFromCategory(blogPosts, "Technology"));
 
 /*
 Skriv en funktion som tar emot arrayen och en författare-sträng och returnerar alla inlägg med den författaren.
+*/
+
+const getPostsFromAuthor = (
+  blogPosts: BlogPost[],
+  author: AllowedAuthors
+): BlogPost[] => {
+  const postsFromAuthor: BlogPost[] = [];
+
+  blogPosts.forEach((post) => {
+    if (post.author === author) {
+      postsFromAuthor.push(post);
+    }
+  });
+
+  return postsFromAuthor;
+};
+
+console.log(getPostsFromAuthor(blogPosts, "Jane Doe"));
+
+/*
+
+
 
 Skriv en funktion som tar emot arrayen och returnerar en array med alla författare.
 

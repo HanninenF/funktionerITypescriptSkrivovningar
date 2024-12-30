@@ -1,4 +1,9 @@
-import { allowedHobbies, allowedOccupations, allowedCategories } from "./data";
+import {
+  allowedHobbies,
+  allowedOccupations,
+  allowedCategories,
+  allowedAuthors,
+} from "./data";
 
 export type Animal = {
   name: string;
@@ -40,5 +45,14 @@ export type Hero = {
   level: number;
 };
 
+export type BlogPost = {
+  title: string;
+  body: string;
+  date: string;
+  author: AllowedAuthors;
+  category: AllowedCategories;
+};
+
 export type AllowedOccupation = (typeof allowedOccupations)[number];
 export type AllowedCategories = (typeof allowedCategories)[number];
+export type AllowedAuthors = (typeof allowedAuthors)[number];

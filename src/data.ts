@@ -1,4 +1,4 @@
-import { Person, Animal, Car, Bike, Hero } from "./types";
+import { Person, Animal, Car, Bike, Hero, BlogPost } from "./types";
 
 export const people: Person[] = [
   { name: "Janne", age: 17, hobbies: ["skateboarding", "gaming"] },
@@ -179,14 +179,6 @@ export const allowedOccupations = [
   "Rogue",
 ] as const;
 
-export type BlogPost = {
-  title: string;
-  body: string;
-  date: string;
-  author: string;
-  category: string;
-};
-
 export const blogPosts: BlogPost[] = [
   {
     title: "The Rise of TypeScript",
@@ -270,4 +262,15 @@ export const allowedCategories = [
   "Education",
 ] as const;
 
-export type AllowedCategories = (typeof allowedCategories)[number];
+export const allowedAuthors = [
+  "Jane Doe",
+  "John Smith",
+  "Emily Brown",
+  "Michael Johnson",
+  "Sarah Lee",
+  "Chris Evans",
+  "Amy Wilson",
+  "Tom Harris",
+  "Sophia Green",
+  "Daniel White",
+] as const;
