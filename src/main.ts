@@ -14,6 +14,7 @@ import {
   AllowedAuthors,
   allowedVehicleTypes,
 } from "./types";
+import { render } from "sass";
 
 /* Typa upp alla funktioner
 OBS! Alla funkttioner skall vara typade på både värdet som funktionen tar emot och det som returneras.
@@ -870,6 +871,41 @@ const getVehiclesFromType = (
 
 console.log(getVehiclesFromType(vehicles as Car[] | Bike[], "Bike"));
 
+const getBikesWithLights = (vehicles: Car[] | Bike[]): Bike[] => {
+  const bikesWithLights: Bike[] = [];
+
+  vehicles.forEach((vehicle) => {
+    if ("type" in vehicle && vehicle.hasLights) {
+      bikesWithLights.push(vehicle);
+    }
+  });
+
+  return bikesWithLights;
+};
+
+console.log(getBikesWithLights(vehicles as Car[] | Bike[]));
+
+const getBikesWithBell = (vehicles: Car[] | Bike[]): Bike[] => {
+  const bikesWithBell: Bike[] = [];
+
+  vehicles.forEach((vehicle) => {
+    if ("type" in vehicle && vehicle.hasBell) {
+      bikesWithBell.push(vehicle);
+    }
+  });
+  return bikesWithBell;
+};
+
+const getBikesWithBasket = (vehicles: Car[] | Bike[]): Bike[] => {
+  const bikesWithBasket: Bike[] = [];
+  vehicles.forEach((vehicle) => {
+    if ("type" in vehicle && vehicle.hasBasket) {
+      bikesWithBasket.push(vehicle);
+    }
+  });
+  return bikesWithBasket;
+};
+
 const cars = getVehiclesFromType(vehicles as Car[] | Bike[], "Car") as Car[];
 
 const bikes = getVehiclesFromType(vehicles as Car[] | Bike[], "Bike") as Bike[];
@@ -894,9 +930,46 @@ const createCheckIcon = () => {
   return icon;
 };
 
-const crossIcon = document.createElement("span") as HTMLSpanElement;
-crossIcon.classList.add("crossIcon");
-crossIcon.textContent = "✖";
+const createCrossIcon = () => {
+  const crossIcon = document.createElement("span") as HTMLSpanElement;
+  crossIcon.textContent = "✖";
+  crossIcon.classList.add("crossIcon");
+  return crossIcon;
+};
+
+const renderCards = (bikes: Bike[]): void => {
+  vehicleUlElement.textContent = "";
+  vehicleDiv.appendChild(vehicleUlElement);
+
+  bikes.forEach((bike) => {
+    const bikeLiElement = document.createElement("li") as HTMLLIElement;
+    bikeLiElement.classList.add("vehicleLiElement");
+    bikeLiElement.textContent = `${bike.brand}\nColor: ${bike.color}\nWeight: ${bike.weight}\nWheels: ${bike.wheels}\nType: ${bike.type}\n`;
+
+    // Basket
+    const basketInfo = document.createElement("div");
+    basketInfo.textContent = "Basket: ";
+    basketInfo.appendChild(
+      bike.hasBasket ? createCheckIcon() : createCrossIcon()
+    );
+    bikeLiElement.appendChild(basketInfo);
+
+    // Bell
+    const bellInfo = document.createElement("div");
+    bellInfo.textContent = "Bell: ";
+    bellInfo.appendChild(bike.hasBell ? createCheckIcon() : createCrossIcon());
+    bikeLiElement.appendChild(bellInfo);
+
+    // Lights
+    const lightsInfo = document.createElement("div");
+    lightsInfo.textContent = "Lights: ";
+    lightsInfo.appendChild(
+      bike.hasLights ? createCheckIcon() : createCrossIcon()
+    );
+    bikeLiElement.appendChild(lightsInfo);
+    vehicleUlElement.appendChild(bikeLiElement);
+  });
+};
 
 vehicleButton.addEventListener("click", (e) => {
   e.preventDefault();
@@ -914,39 +987,22 @@ vehicleButton.addEventListener("click", (e) => {
   }
 
   if (vehicleSelect.value === "Bike") {
-    vehicleUlElement.textContent = "";
-    vehicleDiv.appendChild(vehicleUlElement);
+    renderCards(bikes as Bike[]);
+  }
 
-    bikes.forEach((bike) => {
-      const bikeLiElement = document.createElement("li") as HTMLLIElement;
-      bikeLiElement.classList.add("vehicleLiElement");
-      bikeLiElement.textContent = `${bike.brand}\nColor: ${bike.color}\nWeight: ${bike.weight}\nWheels: ${bike.wheels}\nType: ${bike.type}\n`;
+  if (vehicleSelect.value === "bikesWithLights") {
+    const bikesWithLights = getBikesWithLights(vehicles as Bike[] | Car[]);
+    renderCards(bikesWithLights as Bike[]);
+  }
 
-      // Basket
-      const basketInfo = document.createElement("div");
-      basketInfo.textContent = "Basket: ";
-      basketInfo.appendChild(
-        bike.hasBasket ? createCheckIcon() : crossIcon.cloneNode(true)
-      );
-      bikeLiElement.appendChild(basketInfo);
+  if (vehicleSelect.value === "bikesWithBell") {
+    const bikesWithBell = getBikesWithBell(vehicles as Bike[] | Car[]);
+    renderCards(bikesWithBell as Bike[]);
+  }
 
-      // Bell
-      const bellInfo = document.createElement("div");
-      bellInfo.textContent = "Bell: ";
-      bellInfo.appendChild(
-        bike.hasBell ? createCheckIcon() : crossIcon.cloneNode(true)
-      );
-      bikeLiElement.appendChild(bellInfo);
-
-      // Lights
-      const lightsInfo = document.createElement("div");
-      lightsInfo.textContent = "Lights: ";
-      lightsInfo.appendChild(
-        bike.hasLights ? createCheckIcon() : crossIcon.cloneNode(true)
-      );
-      bikeLiElement.appendChild(lightsInfo);
-      vehicleUlElement.appendChild(bikeLiElement);
-    });
+  if (vehicleSelect.value === "bikesWithBasket") {
+    const bikesWithBasket = getBikesWithBasket(vehicles as Bike[] | Car[]);
+    renderCards(bikesWithBasket as Bike[]);
   }
 });
 
