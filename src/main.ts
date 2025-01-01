@@ -12,6 +12,7 @@ import {
   AllowedOccupation,
   AllowedCategories,
   AllowedAuthors,
+  allowedVehicleTypes,
 } from "./types";
 
 /* Typa upp alla funktioner
@@ -829,6 +830,10 @@ const isBike = (vehicle: Vehicle): vehicle is Bike => {
   return "type" in vehicle;
 };
 
+const isCar = (vehicle: Vehicle): vehicle is Car => {
+  return "engine" in vehicle;
+};
+
 const getVehicleInfo = (VehicleInput: Vehicle): string => {
   if (isBike(VehicleInput)) {
     // Skapa en lokal description istället för att ändra på originalobjektet
@@ -845,6 +850,105 @@ const getVehicleInfo = (VehicleInput: Vehicle): string => {
 };
 
 console.log(getVehicleInfo(vehicles[3]));
+
+const getVehiclesFromType = (
+  vehicles: Car[] | Bike[],
+  vehicleType: allowedVehicleTypes
+): Car[] | Bike[] => {
+  const vehiclesFromType: (Car | Bike)[] = [];
+
+  vehicles.forEach((vehicle) => {
+    if (vehicleType === "Car" && "engine" in vehicle) {
+      vehiclesFromType.push(vehicle);
+    } else if (vehicleType === "Bike" && "type" in vehicle) {
+      vehiclesFromType.push(vehicle);
+    }
+  });
+
+  return vehiclesFromType as Car[] | Bike[];
+};
+
+console.log(getVehiclesFromType(vehicles as Car[] | Bike[], "Bike"));
+
+const cars = getVehiclesFromType(vehicles as Car[] | Bike[], "Car") as Car[];
+
+const bikes = getVehiclesFromType(vehicles as Car[] | Bike[], "Bike") as Bike[];
+
+const vehicleDiv = document.querySelector("#vehicles") as HTMLDivElement;
+
+const vehicleSelect = document.querySelector(
+  "#vehicleDrop"
+) as HTMLSelectElement;
+
+const vehicleButton = document.querySelector(
+  "#getVehicles"
+) as HTMLButtonElement;
+
+const vehicleUlElement = document.createElement("ul") as HTMLUListElement;
+vehicleUlElement.classList.add("vehicleUlElement");
+
+const createCheckIcon = () => {
+  const icon = document.createElement("span");
+  icon.textContent = "✔";
+  icon.classList.add("checkIcon");
+  return icon;
+};
+
+const crossIcon = document.createElement("span") as HTMLSpanElement;
+crossIcon.classList.add("crossIcon");
+crossIcon.textContent = "✖";
+
+vehicleButton.addEventListener("click", (e) => {
+  e.preventDefault();
+
+  if (vehicleSelect.value === "Car") {
+    vehicleUlElement.textContent = "";
+    vehicleDiv.appendChild(vehicleUlElement);
+    cars.forEach((car) => {
+      const carLiElement = document.createElement("li") as HTMLLIElement;
+      carLiElement.classList.add("vehicleLiElement");
+      carLiElement.textContent = `${car.brand}\nColor: ${car.color}\nWeight: ${car.weight}\nWheels: ${car.wheels}\nEngine: ${car.engine}\nSeats: ${car.seats}\nDoors:${car.doors}\n`;
+
+      vehicleUlElement.appendChild(carLiElement);
+    });
+  }
+
+  if (vehicleSelect.value === "Bike") {
+    vehicleUlElement.textContent = "";
+    vehicleDiv.appendChild(vehicleUlElement);
+
+    bikes.forEach((bike) => {
+      const bikeLiElement = document.createElement("li") as HTMLLIElement;
+      bikeLiElement.classList.add("vehicleLiElement");
+      bikeLiElement.textContent = `${bike.brand}\nColor: ${bike.color}\nWeight: ${bike.weight}\nWheels: ${bike.wheels}\nType: ${bike.type}\n`;
+
+      // Basket
+      const basketInfo = document.createElement("div");
+      basketInfo.textContent = "Basket: ";
+      basketInfo.appendChild(
+        bike.hasBasket ? createCheckIcon() : crossIcon.cloneNode(true)
+      );
+      bikeLiElement.appendChild(basketInfo);
+
+      // Bell
+      const bellInfo = document.createElement("div");
+      bellInfo.textContent = "Bell: ";
+      bellInfo.appendChild(
+        bike.hasBell ? createCheckIcon() : crossIcon.cloneNode(true)
+      );
+      bikeLiElement.appendChild(bellInfo);
+
+      // Lights
+      const lightsInfo = document.createElement("div");
+      lightsInfo.textContent = "Lights: ";
+      lightsInfo.appendChild(
+        bike.hasLights ? createCheckIcon() : crossIcon.cloneNode(true)
+      );
+      bikeLiElement.appendChild(lightsInfo);
+      vehicleUlElement.appendChild(bikeLiElement);
+    });
+  }
+});
 
 /* let fooA = function (i: number): number {
   return 2 * i * i;
@@ -1230,3 +1334,40 @@ const getLatestPost = (blogPosts: BlogPost[]): BlogPost => {
 };
 
 console.log(getLatestPost(blogPosts));
+
+//classes
+
+class Character {
+  constructor(
+    public name: string,
+    public age: number
+  ) {}
+}
+
+class LocalHero extends Character {
+  sayHello() {
+    return `Hello, I am ${this.name}, and I'm ${this.age} years old`;
+  }
+  sayNothing() {
+    return "nothing";
+  }
+
+  calculatePower(level: number, experience: number): number {
+    return level * experience;
+  }
+
+  aging(aging: number): void {
+    this.age += aging;
+  }
+}
+
+const hero = new LocalHero("Jaina", 23);
+console.log(hero.sayHello());
+
+console.log(hero.sayNothing());
+console.log(hero.calculatePower(10, 34));
+hero.aging(1);
+hero.aging(10);
+hero.aging(-10);
+hero.aging(-1);
+console.log(hero.age);

@@ -55,6 +55,29 @@ html {
   }
 }
 
+#vehicles {
+  .vehicleUlElement {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: clamp(0.5rem, 0.143rem + 0.952vw, 1rem);
+  }
+
+  .vehicleLiElement {
+    border: solid red;
+    padding: clamp(0.5rem, 0.143rem + 0.952vw, 1rem);
+    white-space: pre-wrap;
+    font-size: clamp(0.3rem, -0.914rem + 3.238vw, 2rem);
+    display: block;
+    grid-area: auto;
+    .checkIcon {
+      color: green;
+    }
+    .crossIcon {
+      color: red;
+    }
+  }
+}
+
 @media (prefers-color-scheme: light) {
   :root {
     color: #213547;

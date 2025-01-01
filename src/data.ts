@@ -153,6 +153,8 @@ export const vehicles: (Car | Bike)[] = [
   },
 ];
 
+export const allowedVehicleTypes = ["Car", "Bike"] as const;
+
 export const heroes: Hero[] = [
   { name: "Arthas", Occupation: "Paladin", level: 45 },
   { name: "Jaina", Occupation: "Mage", level: 50 },
