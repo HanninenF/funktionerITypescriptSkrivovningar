@@ -4,6 +4,8 @@ import {
   allowedCategories,
   allowedAuthors,
   allowedVehicleTypes,
+  stringType,
+  allowedEngines,
 } from "./data";
 
 export type Animal = {
@@ -54,7 +56,15 @@ export type BlogPost = {
   category: AllowedCategories;
 };
 
+export type threeNumberObject = {
+  x: number;
+  y: number;
+  z: number;
+};
+
 export type AllowedOccupation = (typeof allowedOccupations)[number];
 export type AllowedCategories = (typeof allowedCategories)[number];
 export type AllowedAuthors = (typeof allowedAuthors)[number];
 export type allowedVehicleTypes = (typeof allowedVehicleTypes)[number];
+export type AllowedStrings = (typeof stringType)[number];
+export type AllowedEngines = (typeof allowedEngines)[number];

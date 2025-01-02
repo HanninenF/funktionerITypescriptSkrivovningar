@@ -1,5 +1,169 @@
 import { Person, Animal, Car, Bike, Hero, BlogPost } from "./types";
 
+export const numbers = [
+  40886,
+  40886, // 2 gånger
+  40620,
+  40620, // 2 gånger
+  313,
+  313,
+  313, // 3 gånger
+  5779,
+  5779,
+  5779,
+  5779, // 4 gånger
+  7141,
+  7141, // 2 gånger
+  18628,
+  18628, // 2 gånger
+  18427,
+  18427,
+  18427, // 3 gånger
+  20600,
+  20600,
+  20600,
+  20600, // 4 gånger
+  18309,
+  18309, // 2 gånger
+  33198,
+  33198,
+  33198, // 3 gånger
+  22465,
+  22465,
+  22465,
+  22465, // 4 gånger
+  19296,
+  19296, // 2 gånger
+  25177,
+  25177, // 2 gånger
+  622,
+  622,
+  622, // 3 gånger
+  9272,
+  9272,
+  9272,
+  9272,
+  9272, // 5 gånger
+];
+
+export const stringType = [
+  "Hello",
+  "World!",
+  "JavaScript",
+  "is",
+  "awesome",
+  "I love coding",
+  "short",
+  "longer string here that says absolutely nothing",
+  "example",
+  "of",
+  "different",
+  "lengths",
+  "arrays are great",
+  "and fun",
+  "JavaScript arrays",
+] as const;
+
+export const strings = [
+  "Hello",
+  "Hello", // 2 gånger
+  "World!",
+  "World!", // 2 gånger
+  "JavaScript",
+  "JavaScript",
+  "JavaScript", // 3 gånger
+  "another hour",
+  "awesome",
+  "awesome",
+  "awesome",
+  "awesome",
+  "awesome", // 5 gånger
+  "I love coding",
+  "I love coding", // 2 gånger
+  "short",
+  "short", // 2 gånger
+  "longer string here that says absolutely nothing",
+  "longer string here that says absolutely nothing", // 2 gånger
+  "example",
+  "example",
+  "example",
+  "example", // 4 gånger
+  "of",
+  "of",
+  "of", // 3 gånger
+  "different",
+  "different",
+  "different", // 3 gånger
+  "lengths",
+  "lengths",
+  "lengths", // 3 gånger
+  "arrays are great",
+  "arrays are great", // 2 gånger
+  "and fun",
+  "and fun", // 2 gånger
+  "JavaScript arrays",
+  "JavaScript arrays",
+  "JavaScript arrays", // 3 gånger
+  "best of the best",
+  "best of the best", // 2 gånger
+  "don't bother me",
+  "don't bother me", // 2 gånger
+  "alrighty",
+  "alrighty", // 2 gånger
+  "doddle of birds",
+  "doddle of birds", // 2 gånger
+];
+
+export const strings2 = [
+  "Hello",
+  "Hello", // 2 gånger
+  "World!",
+  "World!", // 2 gånger
+  "JavaScript",
+  "starlight",
+  "JavaScript",
+  "JavaScript", // 3 gånger
+  "awesome",
+  "awesome",
+  "awesome",
+  "awesome",
+  "awesome", // 5 gånger
+  "I love coding",
+  "I love coding", // 2 gånger
+  "short",
+  "short", // 2 gånger
+  "longer string here that says absolutely nothing",
+  "longer string here that says absolutely nothing", // 2 gånger
+  "example",
+  "example",
+  "example",
+  "example", // 4 gånger
+  "of",
+  "of",
+  "of", // 3 gånger
+  "different",
+  "different",
+  "different", // 3 gånger
+  "lengths",
+  "lengths",
+  "lengths", // 3 gånger
+  "arrays are great",
+  "arrays are great", // 2 gånger
+  "and fun",
+  "and fun", // 2 gånger
+  "JavaScript arrays",
+  "JavaScript arrays",
+  "JavaScript arrays", // 3 gånger
+  "best of the best",
+  "best of the best", // 2 gånger
+  "don't bother me",
+  "don't bother me", // 2 gånger
+  "alrighty",
+  "alrighty", // 2 gånger
+  "doddle of birds",
+  "doddle of birds", // 2 gånger
+];
+
 export const people: Person[] = [
   { name: "Janne", age: 17, hobbies: ["skateboarding", "gaming"] },
   { name: "Jolin", age: 18 },
@@ -151,7 +315,115 @@ export const vehicles: (Car | Bike)[] = [
     hasLights: true,
     description: "",
   },
+  // Additional vehicles
+  {
+    brand: "Ford",
+    color: "Black",
+    weight: 1900,
+    wheels: 4,
+    engine: "Gasoline",
+    seats: 5,
+    doors: 4,
+    description: "",
+  },
+  {
+    brand: "Chevrolet",
+    color: "Red",
+    weight: 2100,
+    wheels: 4,
+    engine: "Diesel",
+    seats: 8,
+    doors: 5,
+    description: "",
+  },
+  {
+    brand: "Yamaha",
+    color: "Blue",
+    weight: 11,
+    wheels: 2,
+    type: "road",
+    hasBasket: false,
+    hasBell: true,
+    hasLights: false,
+    description: "",
+  },
+  {
+    brand: "Trek",
+    color: "Green",
+    weight: 13,
+    wheels: 2,
+    type: "hybrid",
+    hasBasket: true,
+    hasBell: false,
+    hasLights: true,
+    description: "",
+  },
+  {
+    brand: "Kawasaki",
+    color: "Black",
+    weight: 14,
+    wheels: 2,
+    type: "mountain",
+    hasBasket: false,
+    hasBell: true,
+    hasLights: true,
+    description: "",
+  },
+  {
+    brand: "Audi",
+    color: "Silver",
+    weight: 1700,
+    wheels: 4,
+    engine: "Electric",
+    seats: 5,
+    doors: 4,
+    description: "",
+  },
+  {
+    brand: "BMW",
+    color: "White",
+    weight: 2000,
+    wheels: 4,
+    engine: "Gasoline",
+    seats: 5,
+    doors: 4,
+    description: "",
+  },
+  {
+    brand: "Honda",
+    color: "Red",
+    weight: 12,
+    wheels: 2,
+    type: "electric",
+    hasBasket: true,
+    hasBell: false,
+    hasLights: true,
+    description: "",
+  },
+  {
+    brand: "Scott",
+    color: "Blue",
+    weight: 9,
+    wheels: 2,
+    type: "road",
+    hasBasket: false,
+    hasBell: true,
+    hasLights: false,
+    description: "",
+  },
+  {
+    brand: "Mercedes",
+    color: "Black",
+    weight: 2200,
+    wheels: 4,
+    engine: "Diesel",
+    seats: 7,
+    doors: 5,
+    description: "",
+  },
 ];
+
+export const allowedEngines = ["Electric", "Diesel", "Gasoline"] as const;
 
 export const allowedVehicleTypes = ["Car", "Bike"] as const;
 

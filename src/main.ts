@@ -1,5 +1,14 @@
 import "./style.scss";
-import { people, animals, vehicles, heroes, blogPosts } from "./data";
+import {
+  people,
+  animals,
+  vehicles,
+  heroes,
+  blogPosts,
+  numbers,
+  strings,
+  strings2,
+} from "./data";
 import {
   Hobby,
   Person,
@@ -13,9 +22,12 @@ import {
   AllowedCategories,
   AllowedAuthors,
   allowedVehicleTypes,
+  AllowedStrings,
+  threeNumberObject,
+  AllowedEngines,
 } from "./types";
-import { render } from "sass";
 
+import { LocalHero } from "./Classes";
 /* Typa upp alla funktioner
 OBS! Alla funkttioner skall vara typade på både värdet som funktionen tar emot och det som returneras.
 
@@ -103,52 +115,6 @@ const getBiggestNumberFromNumbers = (numbers: number[]): number => {
   return biggestNumber;
 };
 
-const numbers = [
-  40886,
-  40886, // 2 gånger
-  40620,
-  40620, // 2 gånger
-  313,
-  313,
-  313, // 3 gånger
-  5779,
-  5779,
-  5779,
-  5779, // 4 gånger
-  7141,
-  7141, // 2 gånger
-  18628,
-  18628, // 2 gånger
-  18427,
-  18427,
-  18427, // 3 gånger
-  20600,
-  20600,
-  20600,
-  20600, // 4 gånger
-  18309,
-  18309, // 2 gånger
-  33198,
-  33198,
-  33198, // 3 gånger
-  22465,
-  22465,
-  22465,
-  22465, // 4 gånger
-  19296,
-  19296, // 2 gånger
-  25177,
-  25177, // 2 gånger
-  622,
-  622,
-  622, // 3 gånger
-  9272,
-  9272,
-  9272,
-  9272,
-  9272, // 5 gånger
-];
-
 console.log(getBiggestNumberFromNumbers(numbers));
 
 /* 
@@ -170,124 +136,6 @@ const getLongestString = (stringsInput: string[]): number => {
   return longestStringIndex;
 };
 
-const stringType = [
-  "Hello",
-  "World!",
-  "JavaScript",
-  "is",
-  "awesome",
-  "I love coding",
-  "short",
-  "longer string here that says absolutely nothing",
-  "example",
-  "of",
-  "different",
-  "lengths",
-  "arrays are great",
-  "and fun",
-  "JavaScript arrays",
-] as const;
-
-const strings = [
-  "Hello",
-  "Hello", // 2 gånger
-  "World!",
-  "World!", // 2 gånger
-  "JavaScript",
-  "JavaScript",
-  "JavaScript", // 3 gånger
-  "another hour",
-  "awesome",
-  "awesome",
-  "awesome",
-  "awesome",
-  "awesome", // 5 gånger
-  "I love coding",
-  "I love coding", // 2 gånger
-  "short",
-  "short", // 2 gånger
-  "longer string here that says absolutely nothing",
-  "longer string here that says absolutely nothing", // 2 gånger
-  "example",
-  "example",
-  "example",
-  "example", // 4 gånger
-  "of",
-  "of",
-  "of", // 3 gånger
-  "different",
-  "different",
-  "different", // 3 gånger
-  "lengths",
-  "lengths",
-  "lengths", // 3 gånger
-  "arrays are great",
-  "arrays are great", // 2 gånger
-  "and fun",
-  "and fun", // 2 gånger
-  "JavaScript arrays",
-  "JavaScript arrays",
-  "JavaScript arrays", // 3 gånger
-  "best of the best",
-  "best of the best", // 2 gånger
-  "don't bother me",
-  "don't bother me", // 2 gånger
-  "alrighty",
-  "alrighty", // 2 gånger
-  "doddle of birds",
-  "doddle of birds", // 2 gånger
-];
-
-const strings2 = [
-  "Hello",
-  "Hello", // 2 gånger
-  "World!",
-  "World!", // 2 gånger
-  "JavaScript",
-  "starlight",
-  "JavaScript",
-  "JavaScript", // 3 gånger
-  "awesome",
-  "awesome",
-  "awesome",
-  "awesome",
-  "awesome", // 5 gånger
-  "I love coding",
-  "I love coding", // 2 gånger
-  "short",
-  "short", // 2 gånger
-  "longer string here that says absolutely nothing",
-  "longer string here that says absolutely nothing", // 2 gånger
-  "example",
-  "example",
-  "example",
-  "example", // 4 gånger
-  "of",
-  "of",
-  "of", // 3 gånger
-  "different",
-  "different",
-  "different", // 3 gånger
-  "lengths",
-  "lengths",
-  "lengths", // 3 gånger
-  "arrays are great",
-  "arrays are great", // 2 gånger
-  "and fun",
-  "and fun", // 2 gånger
-  "JavaScript arrays",
-  "JavaScript arrays",
-  "JavaScript arrays", // 3 gånger
-  "best of the best",
-  "best of the best", // 2 gånger
-  "don't bother me",
-  "don't bother me", // 2 gånger
-  "alrighty",
-  "alrighty", // 2 gånger
-  "doddle of birds",
-  "doddle of birds", // 2 gånger
-];
-type AllowedStrings = (typeof stringType)[number];
 console.log(getLongestString(strings));
 
 /* 
@@ -467,12 +315,6 @@ const getArrayFromThreeNumbers = (
 console.log(getArrayFromThreeNumbers(44, 89, 23323));
 
 //UTMANING: Funktionen tar emot ett objekt istället för tre siffror. Objektet har dessa tre siffror.
-
-type threeNumberObject = {
-  x: number;
-  y: number;
-  z: number;
-};
 
 const getArrayFromObject = (x: threeNumberObject): number[] => {
   let numbersInput: number[] = [x.x, x.y, x.z];
@@ -831,10 +673,6 @@ const isBike = (vehicle: Vehicle): vehicle is Bike => {
   return "type" in vehicle;
 };
 
-const isCar = (vehicle: Vehicle): vehicle is Car => {
-  return "engine" in vehicle;
-};
-
 const getVehicleInfo = (VehicleInput: Vehicle): string => {
   if (isBike(VehicleInput)) {
     // Skapa en lokal description istället för att ändra på originalobjektet
@@ -905,6 +743,23 @@ const getBikesWithBasket = (vehicles: Car[] | Bike[]): Bike[] => {
   });
   return bikesWithBasket;
 };
+
+const getCarsFromEngine = (
+  vehicles: Car[] | Bike[],
+  engine: AllowedEngines
+): Car[] => {
+  const carsFromEngine: Car[] = [];
+
+  vehicles.forEach((vehicle) => {
+    if ("engine" in vehicle && vehicle.engine === engine) {
+      carsFromEngine.push(vehicle);
+    }
+  });
+
+  return carsFromEngine;
+};
+
+console.log(getCarsFromEngine(vehicles as Car[] | Bike[], "Gasoline"));
 
 const cars = getVehiclesFromType(vehicles as Car[] | Bike[], "Car") as Car[];
 
@@ -1391,32 +1246,6 @@ const getLatestPost = (blogPosts: BlogPost[]): BlogPost => {
 
 console.log(getLatestPost(blogPosts));
 
-//classes
-
-class Character {
-  constructor(
-    public name: string,
-    public age: number
-  ) {}
-}
-
-class LocalHero extends Character {
-  sayHello() {
-    return `Hello, I am ${this.name}, and I'm ${this.age} years old`;
-  }
-  sayNothing() {
-    return "nothing";
-  }
-
-  calculatePower(level: number, experience: number): number {
-    return level * experience;
-  }
-
-  aging(aging: number): void {
-    this.age += aging;
-  }
-}
-
 const hero = new LocalHero("Jaina", 23);
 console.log(hero.sayHello());
 
@@ -1427,3 +1256,10 @@ hero.aging(10);
 hero.aging(-10);
 hero.aging(-1);
 console.log(hero.age);
+
+const LeifHero = new LocalHero("Leif", 54);
+LeifHero.calculatePower(54, 34);
+
+console.log(
+  `Name: ${LeifHero.name}\nAge: ${LeifHero.age}\nPower: ${LeifHero.calculatePower(32, 10)}`
+);
